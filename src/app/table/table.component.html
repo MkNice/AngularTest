@@ -35,7 +35,9 @@
   </tbody>
   <tfoot>
     <tr class="total-cost">
-      <td colspan="3">Общая стоимость всех товаров</td>
+      <td colspan="3" class="total" (click)="sort()">
+        Общая стоимость всех товаров
+      </td>
       <td>{{ generalCostAllProducts() }}</td>
     </tr>
   </tfoot>

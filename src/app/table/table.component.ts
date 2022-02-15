@@ -42,4 +42,7 @@ export class TableComponent implements OnInit {
     return Object.values(this.products).reduce(
       (a: any, b: any) => a += b.general, 0);
   };
+  sort(){
+    
+  }
 }

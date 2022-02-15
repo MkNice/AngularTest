@@ -9,6 +9,10 @@ table {
       td {
         text-align: center;
       }
+      td:last-child:hover{
+        text-decoration: underline;
+        cursor: pointer;
+      }
     }
   }
   tbody {
