@@ -7,13 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableComponent implements OnInit {
 
-  public generalCostAllItems: number = 0;
-
   public products = {
     redSock: {
       count: 0,
       cost: 0,
-      general: 3,
+      general: 0,
       generalCalc() {
         this.general = this.count * this.cost;
       },
@@ -21,7 +19,7 @@ export class TableComponent implements OnInit {
     blueSock: {
       count: 0,
       cost: 0,
-      general: 3,
+      general: 0,
       generalCalc() {
         this.general = this.count * this.cost;
       },
@@ -41,8 +39,7 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
   }
   public generalCostAllProducts = () => {
-    debugger
-    Object.values(this.products).reduce(
-      (a: any, b: any) => this.generalCostAllItems += b.general, 0);
+    return Object.values(this.products).reduce(
+      (a: any, b: any) => a += b.general, 0);
   };
 }
