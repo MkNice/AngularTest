@@ -16,13 +16,21 @@
       <tr class="table-body-row" *ngFor="let product of products">
         <td class="table-body-elem">{{ product.nameProduct }}</td>
         <td class="table-body-elem">
-          <input type="number" [(ngModel)]="product.count" />
+          <input
+            (ngModelChange)="rowSumCalc($event, product, 'count')"
+            type="number"
+            [(ngModel)]="product.count"
+          />
         </td>
         <td class="table-body-elem">
-          <input type="number" [(ngModel)]="product.cost" />
+          <input
+            (ngModelChange)="rowSumCalc($event, product)"
+            type="number"
+            [(ngModel)]="product.cost"
+          />
         </td>
         <td class="table-body-elem">
-          {{ product.generalCalc() }}{{ product.general }}
+          {{ product.general }}
         </td>
       </tr>
     </tbody>

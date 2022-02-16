@@ -1,68 +1,42 @@
-import { AfterContentChecked, ChangeDetectorRef, Component, OnInit, } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { IProducts } from './products.interface';
+import { TableService } from './table.service';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit, AfterContentChecked {
+
+export class TableComponent implements OnInit {
 
   public generalCost: number = 0;
   public sortByDecrease: boolean = true;
-  public products: IProducts[] = [
-    {
-      nameProduct: 'Красный носок',
-      count: 0,
-      cost: 0,
-      general: 0,
-      generalCalc() {
-        this.general = this.count * this.cost;
-      },
-    },
-    {
-      nameProduct: 'Синий носок',
-      count: 0,
-      cost: 0,
-      general: 0,
-      generalCalc() {
-        this.general = this.count * this.cost;
-      },
-    },
-    {
-      nameProduct: 'Бесцветный носок',
-      count: 0,
-      cost: 0,
-      general: 0,
-      generalCalc() {
-        this.general = this.count * this.cost;
-      },
-    },
-  ];
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor(private tableService: TableService) { }
 
   ngOnInit(): void { }
 
-  ngAfterContentChecked(): void {
-    this.generalCostAllProducts();
-    this.cdr.detectChanges();
+  public rowSumCalc(num: number, product: IProducts, typeOf: string = 'cost'): void {
+    this.generalCost = 0;
+    if (typeOf === 'count') {
+      product.general = product.cost * num;
+    } else {
+      product.general = product.count * num;
+    }
+    this.updateGeneralCost();
   }
-  public generalCostAllProducts = () => {
-    this.products.reduce(
-      (acc: number, product: IProducts) => {
-        acc += product.general;
-        return this.generalCost = acc;
-      }, 0);
-  };
+
+  public updateGeneralCost(): void {
+    this.tableService.products.forEach((element: IProducts) => {
+      this.generalCost += element.general;
+    });
+  }
 
   public sort() {
-    if (this.sortByDecrease) {
-      this.products.sort((a: IProducts, b: IProducts) => a.general - b.general);
-      this.sortByDecrease = false;
-    } else if (!this.sortByDecrease) {
-      this.products.sort((b: IProducts, a: IProducts) => a.general - b.general);
-      this.sortByDecrease = true;
-    }
+    this.sortByDecrease = !this.sortByDecrease;
+    this.sortByDecrease
+      ? this.tableService.products.sort((a: IProducts, b: IProducts) => a.general - b.general)
+      : this.tableService.products.sort((a: IProducts, b: IProducts) => b.general - a.general);
   }
 }
