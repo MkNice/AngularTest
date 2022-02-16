@@ -33,7 +33,7 @@ export class TableComponent implements OnInit {
     });
   }
 
-  public sort() {
+  public sort(): void {
     this.sortByDecrease = !this.sortByDecrease;
     this.sortByDecrease
       ? this.tableService.products.sort((a: IProducts, b: IProducts) => a.general - b.general)
