@@ -5,7 +5,11 @@
         <td class="table-head-elem">Название товара</td>
         <td class="table-head-elem">Количество</td>
         <td class="table-head-elem">Cтоимость 1ед.</td>
-        <td class="table-head-elem">Общая стоимость</td>
+        <td class="table-head-elem" (click)="sort()">
+          <span class="table-head-elem-content">Общая стоимость</span>
+          <span *ngIf="sortByDecrease">&#9650;</span>
+          <span *ngIf="!sortByDecrease">&#9660;</span>
+        </td>
       </tr>
     </thead>
     <tbody class="table-body">
@@ -24,7 +28,7 @@
     </tbody>
     <tfoot class="table-foot">
       <tr class="total-foot-row">
-        <td class="table-foot-elem" colspan="3" class="total" (click)="sort()">
+        <td class="table-foot-elem" colspan="3" class="total">
           Общая стоимость всех товаров
         </td>
         <td class="table-foot-elem">{{ generalCostAllProducts() }}</td>

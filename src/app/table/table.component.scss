@@ -12,9 +12,13 @@
         .table-head-elem {
           text-align: center;
         }
-        .table-head-elem:last-child:hover {
+        .table-head-elem-content:hover {
           text-decoration: underline;
           cursor: pointer;
+          user-select: none;
+          -moz-user-select: none;
+          -khtml-user-select: none;
+          -webkit-user-select: none;
         }
       }
     }
