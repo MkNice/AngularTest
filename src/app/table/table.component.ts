@@ -12,8 +12,11 @@ export class TableComponent implements OnInit {
 
   public generalCost: number = 0;
   public sortByDecrease: boolean = true;
+  public products: IProducts[] = [];
 
-  constructor(private tableService: TableService) { }
+  constructor(private tableService: TableService) {
+    this.products = this.tableService.products;
+   }
 
   ngOnInit(): void { }
 
