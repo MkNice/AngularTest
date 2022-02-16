@@ -41,8 +41,8 @@ export class TableComponent implements OnInit {
 
     ngOnInit(): void { }
 
-  public generalCostAllProducts = () => {
-     return Object.values(this.products).reduce(
+  public generalCostAllProducts = () => { // Need refactoring cause 
+     return Object.values(this.products).reduce( // ! Error: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked. Previous value: '0'. Current value: '-1'
       (acc: number, product: IProducts) => acc += product.general, 0)
   };
   sort() {
