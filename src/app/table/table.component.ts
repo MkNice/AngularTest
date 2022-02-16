@@ -1,48 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
+import { IProducts } from './products.interface';
+import { TableService } from './table.service';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
+
 export class TableComponent implements OnInit {
 
-  public products = {
-    redSock: {
-      count: 0,
-      cost: 0,
-      general: 0,
-      generalCalc() {
-        this.general = this.count * this.cost;
-      },
-    },
-    blueSock: {
-      count: 0,
-      cost: 0,
-      general: 0,
-      generalCalc() {
-        this.general = this.count * this.cost;
-      },
-    },
-    insipid: {
-      count: 0,
-      cost: 0,
-      general: 0,
-      generalCalc() {
-        this.general = this.count * this.cost;
-      },
-    },
-  };
-  constructor() {
+  public generalCost: number = 0;
+  public sortByDecrease: boolean = true;
+  public products: IProducts[] = [];
+
+  constructor(private tableService: TableService) {
+    this.products = this.tableService.products;
+   }
+
+  ngOnInit(): void { }
+
+  public rowSumCalc(num: number, product: IProducts, typeOf: string = 'cost'): void {
+    this.generalCost = 0;
+    if (typeOf === 'count') {
+      product.general = product.cost * num;
+    } else {
+      product.general = product.count * num;
+    }
+    this.updateGeneralCost();
   }
 
-  ngOnInit(): void {
+  public updateGeneralCost(): void {
+    this.tableService.products.forEach((element: IProducts) => {
+      this.generalCost += element.general;
+    });
   }
-  public generalCostAllProducts = () => {
-    return Object.values(this.products).reduce(
-      (a: any, b: any) => a += b.general, 0);
-  };
-  sort(){
-    
+
+  public sort(): void {
+    this.sortByDecrease = !this.sortByDecrease;
+    this.sortByDecrease
+      ? this.tableService.products.sort((a: IProducts, b: IProducts) => a.general - b.general)
+      : this.tableService.products.sort((a: IProducts, b: IProducts) => b.general - a.general);
   }
 }

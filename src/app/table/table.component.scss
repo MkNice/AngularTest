@@ -1,48 +1,64 @@
-table {
-  border: 1px solid #000;
-  border-collapse: collapse;
+.wrapper-table {
+  width: 800px;
+  margin: 300px auto 0;
+  .table-products {
+    border: 1px solid #000;
+    border-collapse: collapse;
 
-  thead {
-    background-color: #000;
-    tr {
-      color: #fff;
-      td {
+    .table-head {
+      background-color: #000;
+      .table-head-row {
+        color: #fff;
+        .table-head-elem {
+          text-align: center;
+        }
+        .table-head-elem-content:hover {
+          text-decoration: underline;
+          cursor: pointer;
+          user-select: none;
+          -moz-user-select: none;
+          -khtml-user-select: none;
+          -webkit-user-select: none;
+        }
+      }
+    }
+
+    .table-body {
+      .table-body-elem {
+        border: 1px solid #000;
+        height: 30px;
+        width: 200px;
         text-align: center;
       }
-      td:last-child:hover{
-        text-decoration: underline;
-        cursor: pointer;
+      .table-body-elem:first-child {
+        text-align: left;
+        padding-left: 10px;
+      }
+      .table-body-elem:hover {
+        background-color: #add8e6; //lightblue
+      }
+    }
+
+    .table-foot {
+      .table-foot-elem {
+        color: #f00;
+        font-weight: bold;
+        border: 1px solid #000;
+      }
+      .table-foot-elem:hover {
+        background-color: #add8e6; //lightblue
+      }
+      .table-foot-elem:first-child {
+        padding-left: 10px;
+      }
+      .table-foot-elem:last-child {
+        text-align: center;
       }
     }
   }
-  tbody {
-    td {
-      border: 1px solid #000;
-      height: 30px;
-      width: 200px;
-      text-align: center;
-    }
-    td:first-child {
-      text-align: left;
-    }
-    td:hover{
-    background-color: lightblue;
-    }
+  .table-head-elem,
+  .table-body-elem,
+  .table-foot-elem {
+    height: 30px;
   }
-
-  tfoot {
-    td {
-      color: #f00;
-      font-weight: bold;
-    }
-    td:last-child {
-      text-align: center;
-    }
-  }
-  tfoot:hover {
-    background-color: lightblue;
-  }
-}
-td {
-  height: 30px;
 }
