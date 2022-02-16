@@ -1,5 +1,5 @@
 import { AfterContentChecked, ChangeDetectorRef, Component, OnInit, } from '@angular/core';
-import { IProducts } from './interfaceProducts';
+import { IProducts } from './products.interface';
 
 @Component({
   selector: 'app-table',
