@@ -1,59 +1,45 @@
 import { Component, OnInit, } from '@angular/core';
-import { IProducts } from './interfaceProducts';
+import { IProducts } from './products.interface';
+import { TableService } from './table.service';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
+
 export class TableComponent implements OnInit {
 
+  public generalCost: number = 0;
   public sortByDecrease: boolean = true;
-  public products: IProducts[] = [
-    {
-      nameProduct: 'Красный носок',
-      count: 0,
-      cost: 0,
-      general: 0,
-      generalCalc() {
-        this.general = this.count * this.cost;
-      },
-    },
-    {
-      nameProduct: 'Синий носок',
-      count: 0,
-      cost: 0,
-      general: 0,
-      generalCalc() {
-        this.general = this.count * this.cost;
-      },
-    },
-    {
-      nameProduct: 'Бесцветный носок',
-      count: 0,
-      cost: 0,
-      general: 0,
-      generalCalc() {
-        this.general = this.count * this.cost;
-      },
-    },
-  ];
-  constructor() { }
+  public products: IProducts[] = [];
+
+  constructor(private tableService: TableService) {
+    this.products = this.tableService.products;
+   }
 
   ngOnInit(): void { }
 
-  public generalCostAllProducts = () => { // Need refactoring cause
-    return this.products.reduce( // ! Error: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked. Previous value: '0'. Current value: '-1'
-      (acc: number, product: IProducts) => acc += product.general, 0);
-  };
-
-  sort() {
-    if (this.sortByDecrease) {
-      this.products.sort((a: IProducts, b: IProducts) => a.general - b.general);
-      this.sortByDecrease = false;
-    } else if(!this.sortByDecrease) {
-      this.products.sort((b: IProducts, a: IProducts) => a.general - b.general);
-      this.sortByDecrease = true;
+  public rowSumCalc(num: number, product: IProducts, typeOf: string = 'cost'): void {
+    this.generalCost = 0;
+    if (typeOf === 'count') {
+      product.general = product.cost * num;
+    } else {
+      product.general = product.count * num;
     }
+    this.updateGeneralCost();
+  }
+
+  public updateGeneralCost(): void {
+    this.tableService.products.forEach((element: IProducts) => {
+      this.generalCost += element.general;
+    });
+  }
+
+  public sort(): void {
+    this.sortByDecrease = !this.sortByDecrease;
+    this.sortByDecrease
+      ? this.tableService.products.sort((a: IProducts, b: IProducts) => a.general - b.general)
+      : this.tableService.products.sort((a: IProducts, b: IProducts) => b.general - a.general);
   }
 }
