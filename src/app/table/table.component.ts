@@ -1,4 +1,4 @@
-import { Component, OnInit,  } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { IProducts } from './interfaceProducts';
 
 @Component({
@@ -8,6 +8,7 @@ import { IProducts } from './interfaceProducts';
 })
 export class TableComponent implements OnInit {
 
+  public sortByDecrease: boolean = true;
   public products: IProducts[] = [
     {
       nameProduct: 'Красный носок',
@@ -39,13 +40,20 @@ export class TableComponent implements OnInit {
   ];
   constructor() { }
 
-    ngOnInit(): void { }
+  ngOnInit(): void { }
 
-  public generalCostAllProducts = () => { // Need refactoring cause 
-     return Object.values(this.products).reduce( // ! Error: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked. Previous value: '0'. Current value: '-1'
-      (acc: number, product: IProducts) => acc += product.general, 0)
+  public generalCostAllProducts = () => { // Need refactoring cause
+    return this.products.reduce( // ! Error: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked. Previous value: '0'. Current value: '-1'
+      (acc: number, product: IProducts) => acc += product.general, 0);
   };
-  sort() {
 
+  sort() {
+    if (this.sortByDecrease) {
+      this.products.sort((a: IProducts, b: IProducts) => a.general - b.general);
+      this.sortByDecrease = false;
+    } else if(!this.sortByDecrease) {
+      this.products.sort((b: IProducts, a: IProducts) => a.general - b.general);
+      this.sortByDecrease = true;
+    }
   }
 }
