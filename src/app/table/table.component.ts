@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
+import { IProducts } from './interfaceProducts';
 
 @Component({
   selector: 'app-table',
@@ -7,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableComponent implements OnInit {
 
-  public products = {
-    redSock: {
+  public products: IProducts[] = [
+    {
+      nameProduct: 'Красный носок',
       count: 0,
       cost: 0,
       general: 0,
@@ -16,7 +18,8 @@ export class TableComponent implements OnInit {
         this.general = this.count * this.cost;
       },
     },
-    blueSock: {
+    {
+      nameProduct: 'Синий носок',
       count: 0,
       cost: 0,
       general: 0,
@@ -24,7 +27,8 @@ export class TableComponent implements OnInit {
         this.general = this.count * this.cost;
       },
     },
-    insipid: {
+    {
+      nameProduct: 'Бесцветный носок',
       count: 0,
       cost: 0,
       general: 0,
@@ -32,17 +36,16 @@ export class TableComponent implements OnInit {
         this.general = this.count * this.cost;
       },
     },
-  };
-  constructor() {
-  }
+  ];
+  constructor() { }
 
-  ngOnInit(): void {
-  }
-  public generalCostAllProducts = () => {
-    return Object.values(this.products).reduce(
-      (a: any, b: any) => a += b.general, 0);
+    ngOnInit(): void { }
+
+  public generalCostAllProducts = () => { // Need refactoring cause 
+     return Object.values(this.products).reduce( // ! Error: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked. Previous value: '0'. Current value: '-1'
+      (acc: number, product: IProducts) => acc += product.general, 0)
   };
-  sort(){
-    
+  sort() {
+
   }
 }

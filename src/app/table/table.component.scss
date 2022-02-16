@@ -1,48 +1,54 @@
-table {
-  border: 1px solid #000;
-  border-collapse: collapse;
+.wrapper-table {
+  width: 800px;
+  margin: 300px auto 0;
+  .table-products {
+    border: 1px solid #000;
+    border-collapse: collapse;
 
-  thead {
-    background-color: #000;
-    tr {
-      color: #fff;
-      td {
+    .table-head {
+      background-color: #000;
+      .table-head-row {
+        color: #fff;
+        .table-head-elem {
+          text-align: center;
+        }
+        .table-head-elem:last-child:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+    .table-body {
+      .table-body-elem {
+        border: 1px solid #000;
+        height: 30px;
+        width: 200px;
         text-align: center;
       }
-      td:last-child:hover{
-        text-decoration: underline;
-        cursor: pointer;
+      .table-body-elem:first-child {
+        text-align: left;
+      }
+      .table-body-elem:hover {
+        background-color: #add8e6; //lightblue
       }
     }
-  }
-  tbody {
-    td {
-      border: 1px solid #000;
-      height: 30px;
-      width: 200px;
-      text-align: center;
-    }
-    td:first-child {
-      text-align: left;
-    }
-    td:hover{
-    background-color: lightblue;
-    }
-  }
 
-  tfoot {
-    td {
-      color: #f00;
-      font-weight: bold;
+    .table-foot {
+      .table-foot-elem {
+        color: #f00;
+        font-weight: bold;
+      }
+      .table-foot-elem:last-child {
+        text-align: center;
+      }
     }
-    td:last-child {
-      text-align: center;
+    .table-foot:hover {
+      background-color: #add8e6; //lightblue
     }
   }
-  tfoot:hover {
-    background-color: lightblue;
+  .table-head-elem,
+  .table-body-elem,
+  .table-foot-elem {
+    height: 30px;
   }
-}
-td {
-  height: 30px;
 }
