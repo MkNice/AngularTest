@@ -22,6 +22,7 @@
         }
       }
     }
+
     .table-body {
       .table-body-elem {
         border: 1px solid #000;
@@ -31,6 +32,7 @@
       }
       .table-body-elem:first-child {
         text-align: left;
+        padding-left: 10px;
       }
       .table-body-elem:hover {
         background-color: #add8e6; //lightblue
@@ -41,13 +43,17 @@
       .table-foot-elem {
         color: #f00;
         font-weight: bold;
+        border: 1px solid #000;
+      }
+      .table-foot-elem:hover {
+        background-color: #add8e6; //lightblue
+      }
+      .table-foot-elem:first-child {
+        padding-left: 10px;
       }
       .table-foot-elem:last-child {
         text-align: center;
       }
-    }
-    .table-foot:hover {
-      background-color: #add8e6; //lightblue
     }
   }
   .table-head-elem,
